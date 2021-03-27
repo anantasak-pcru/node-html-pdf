@@ -22,8 +22,6 @@ async function create(options) {
 
     await page.setContent(result)
 
-    console.log(options.options)
-
     const data = await page.pdf(options.options)
 
     browser.close()
@@ -33,9 +31,6 @@ async function create(options) {
         return
     }
     return Buffer.from(Object.values(data))
-
 }
-
-
 
 module.exports = { create, registerHelper }
