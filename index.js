@@ -2,6 +2,10 @@ const puppeteer = require('puppeteer')
 const handlebar = require('handlebars')
 const fs = require('fs')
 
+function registerHelper(name, callback) {
+    handlebar.registerHelper(name, callback)
+}
+
 async function create(options) {
     const args = [
         '--no-sandbox',
@@ -14,12 +18,13 @@ async function create(options) {
 
     const result = handlebar.compile(options.html)(options.data)
 
-
     const page = await browser.newPage()
 
     await page.setContent(result)
 
-    const data = await page.pdf()
+    console.log(options.options)
+
+    const data = await page.pdf(options.options)
 
     browser.close()
 
@@ -31,4 +36,6 @@ async function create(options) {
 
 }
 
-module.exports = { create }
+
+
+module.exports = { create, registerHelper }
