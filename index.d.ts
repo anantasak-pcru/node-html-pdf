@@ -17,6 +17,7 @@ interface Options {
         left?: string | number
     }
     preferCSSPageSize?: boolean
+    scale?: number
 }
 
 interface PdfOptions {
